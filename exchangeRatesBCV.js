@@ -1,26 +1,26 @@
-const exchangeRates = {
+const exchangeRatesBCV = {
   "USD": { 
-    "EUR": 1.08268, // Aproximado a 5 decimales
-    "Bs": 36.2274, 
-    "COP": 26.5527, // Aproximado a 4 decimales
+    "EUR": 0.92363395,
+    "Bs": 36.2274,
+    "COP": 3766.10037694894,
     "USD": 1 
   },
   "EUR": { 
-    "USD": 0.92363, // Aproximado a 5 decimales
-    "Bs": 39.22268143,
-    "COP": 24.5249, // Aproximado a 4 decimales
+    "USD": 1.08268000,
+    "Bs": 339.22268143,
+    "COP": 4077.48155591,
     "EUR": 1 
   },
   "Bs": { 
-    "USD": 0.02760, // Aproximado a 5 decimales
-    "EUR": 0.02550, // Aproximado a 5 decimales
-    "COP": 0.00104, // Aproximado a 5 decimales
+    "USD": 0.0276034161987888,
+    "EUR": 0.02549545, 
+    "COP": 103.957236151337,
     "Bs": 1 
   },
   "COP": { 
-    "USD": 0.03766, // Aproximado a 5 decimales
-    "EUR": 0.04077, // Aproximado a 5 decimales
-    "Bs": 961.934,
+    "USD": 0.000265526645577657,
+    "EUR": 0.00024525,
+    "Bs": 0.00961934,
     "COP": 1 
   }
 };
