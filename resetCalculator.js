@@ -1,41 +1,35 @@
 ////function para resetear todos los valores 
-
-
-function resetCalculator() {
-  // Restablecer campos de entrada de monto
-  document.getElementById('totalAmountToPay').value = '';
-  document.querySelectorAll('input[type="number"]').forEach(input => {
-      input.value = '';
+function clearElementsById(ids) {
+  ids.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) element.innerHTML = element.value = '';
   });
-
-  // Desmarcar todas las selecciones de moneda
-  document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-      checkbox.checked = false;
-  });
- // Desmarcar todas las selecciones de moneda para recibir cambio 
- document.querySelectorAll('input[type="radio"]').forEach(radio => {
-    radio.checked = false;
-});
-
-
-  document.getElementById('currencyToPay').selectedIndex = 0; // Restablecer a la primera opción
-
-  // Limpiar resultados
-  document.getElementById('result').innerHTML = '';
-  document.getElementById('result2').innerHTML = '';
-  document.getElementById("resultUSD").innerHTML = '';
-  document.getElementById("resultEUR").innerHTML = '';
-  document.getElementById("resultBs").innerHTML = '';
-  document.getElementById("resultCOP").innerHTML = '';
-
-  // Aquí puedes agregar cualquier otro campo o elemento que necesites restablecer
 }
 
-// Asegúrate de llamar a esta función cuando el botón de reinicio sea clickeado
+function applyToAllSelectors(selector, callback) {
+  document.querySelectorAll(selector).forEach(callback);
+}
+
+function resetCalculator() {
+  // Limpiar campos de entrada y resultados
+  clearElementsById(['totalAmountToPay', 'result', 'result2', 'resultUSD', 'resultEUR', 'resultBs', 'resultCOP']);
+
+  // Restablecer campos de entrada numéricos, checkboxes y radios
+  applyToAllSelectors('input[type="number"], input[type="checkbox"], input[type="radio"]', input => {
+    if (input.type === 'number') input.value = '';
+    else input.checked = false;
+  });
+
+  // Restablecer selección de moneda a la primera opción
+  document.getElementById('currencyToPay').selectedIndex = 0;
+}
+
+// Agregar event listener al botón de reinicio después de cargar el contenido
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('resetButton').addEventListener('click', resetCalculator);
 });
 
-
+// Hacer resetCalculator disponible globalmente
 window.resetCalculator = resetCalculator;
+
 
