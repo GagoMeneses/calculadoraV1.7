@@ -34,7 +34,7 @@ function calculateAndDisplayAmountsNeeded(difference, currencyToPay) {
     let amountNeeded = difference * (rates[currencyToPay][currency] || 1);
     resultElement.textContent = difference > 0 
       ? `Faltan ${amountNeeded.toFixed(2)} ${currency} para completar el pago.` 
-      : "No se debe nada o hay un excedente.";
+      : " "; //No se debe nada o hay un excedente.
   });
 }
 

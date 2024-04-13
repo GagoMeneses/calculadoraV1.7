@@ -10,15 +10,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>InterCambio de Monedas</h1>
+        <h3>&#x2193;Desliza para reiniciar&#x2193;</h3>
+        <h1>Calculadora de Pagos y Cambios</h1>
         <div class="exchange-type">
             <h2>Tipo de cambio</h2>
-            <select id="exchangeSource">
+            <select class="exchangeSource" id="exchangeSource">
               <option value="BCV">BCV </option>
               <option value="Paralelo">Paralelo</option>
               <option value="DolarToday">DolarToday</option>
             </select>
           </div>
+          <h2 class="cambiosInfo">BCV:36.23 - DolarToday:38.86</h2>
           
         <div class="container">
           <div>
@@ -26,91 +28,102 @@
               <div class="total-amount">
                 <input type="number" id="totalAmountToPay" placeholder="Monto Total">
                 <select id="currencyToPay">
-                    <option value="USD">Dólares Americanos (USD)</option>
-                    <option value="EUR">Euros (EUR)</option>
-                    <option value="Bs">Bolívares (Bs)</option>
-                    <option value="COP">Pesos Colombia (COP)</option>
+                    <option value="USD">Dólares 🇺🇸</option>
+                    <option value="EUR">Euros 🇪🇺</option>
+                    <option value="Bs">Bolívares 🇻🇪</option>
+                    <option value="COP">Pesos 🇨🇴</option>
                 </select>
               </div>
           </div>
           <div>
         <div>
             <h2>Vas a pagar con:</h2>
-            <div>
-                <input type="checkbox" id="payWithUSD" name="paymentCurrency" value="USD">
-                <label for="payWithUSD">Dólares Americanos (USD)</label>
-                <p id="resultUSD"></p>
+            <div class="payment-section">
                 <input type="number" id="amountUSD" placeholder="Monto en USD">
+                <input type="checkbox" id="payWithUSD" name="paymentCurrency" value="USD">
+                <label for="payWithUSD">Dólares</label>
+                <p id="resultUSD"></p>
             </div>
-            <div>
-                <input type="checkbox" id="payWithEUR" name="paymentCurrency" value="EUR">
-                <label for="payWithEUR">Euros (EUR)</label>
-                <p id="resultEUR"></p>
+            <div class="payment-section">
                 <input type="number" id="amountEUR" placeholder="Monto en EUR">
+                <input type="checkbox" id="payWithEUR" name="paymentCurrency" value="EUR">
+                <label for="payWithEUR">Euros</label>
+                <p id="resultEUR"></p>
             </div>
-            <div>
-                <input type="checkbox" id="payWithBs" name="paymentCurrency" value="Bs">
-                <label for="payWithBsBCV">Bolívares (Bs)</label>
-                <p id="resultBs"></p>
+            <div class="payment-section">
                 <input type="number" id="amountBs" placeholder="Monto en Bs">
+                <input type="checkbox" id="payWithBs" name="paymentCurrency" value="Bs">
+                <label for="payWithBsBCV">Bolívares</label>
+                <p id="resultBs"></p>
             </div>
-            <div>
-                <input type="checkbox" id="payWithCOP" name="paymentCurrency" value="COP">
-                <label for="payWithCOP">Pesos (COP)</label>
-                <p id="resultCOP"></p>
+            <div class="payment-section">
                 <input type="number" id="amountCOP" placeholder="Monto en COP">
+                <input type="checkbox" id="payWithCOP" name="paymentCurrency" value="COP">
+                <label for="payWithCOP">Pesos</label>
+                <p id="resultCOP"></p>
             </div>
         </div>
         <div>
-            <h2>Selecciona la moneda para recibir el cambio:</h2>
-            <div>
-                <input type="radio" id="changeInUSD" name="changeCurrency" value="USD">
-                <label for="changeInUSD">Dólares Americanos (USD)</label>
+            <h2>Tu cambio en:</h2>
+            <div class="radio-buttons-container">
+                <div>
+                    <input type="radio" id="changeInUSD" name="changeCurrency" value="USD" checked>
+                    <label for="changeInUSD">Dólares</label>
+                </div>
+                <div>
+                    <input type="radio" id="changeInEUR" name="changeCurrency" value="EUR">
+                    <label for="changeInEUR">Euros</label>
+                </div>
+                <div>
+                    <input type="radio" id="changeInBs" name="changeCurrency" value="Bs">
+                    <label for="changeInBs">Bolívares</label>
+                </div>
+                <div>
+                    <input type="radio" id="changeInCOP" name="changeCurrency" value="COP">
+                    <label for="changeInCOP">Pesos</label>
+                </div>
             </div>
-            <div>
-                <input type="radio" id="changeInEUR" name="changeCurrency" value="EUR">
-                <label for="changeInEUR">Euros (EUR)</label>
-            </div>
-            <div>
-                <input type="radio" id="changeInBs" name="changeCurrency" value="Bs">
-                <label for="changeInBs">Bolívares (Bs)</label>
-            </div>
-            <div>
-                <input type="radio" id="changeInCOP" name="changeCurrency" value="COP">
-                <label for="changeInCOP">Pesos Colombia (COP)</label>
-            </div>
+            
         </div>
         <button onclick="calculateChange()">Calcular Cambio</button>
-        <button id="resetButton">Reiniciar</button>
+        <!-- <button id="resetButton">Reiniciar</button> -->
 
         <div id="result"></div>
 
         <div>
-          <h2>Deseas recibir el cambio en dos monedas diferentes?</h2>
+          <h2>¿Recibes el cambio en dos monedas?</h2>
         </div>
 
-        <div id="changeOptions" style="display:block;">
-          <label for="firstCurrencyAmount">Monto en Primera Moneda:</label>
-          <input type="number" id="firstCurrencyAmount" placeholder="Monto en primera moneda">
-          <select id="firstCurrency">
-              <option value="USD">USD</option>
-              <option value="EUR">EUR</option>
-              <option value="Bs">Bs</option>
-              <option value="COP">COP</option>
-              <!-- Agrega más monedas según sea necesario -->
-          </select>
-          <br>
-          <label for="secondCurrency">Segunda Moneda:</label>
-          <select id="secondCurrency">
-              <option value="EUR">EUR</option>
-              <option value="USD">USD</option>
-              <option value="Bs">Bs</option>
-              <option value="COP">COP</option>
-              <!-- Agrega más monedas según sea necesario -->
-          </select>
-          <br>
-          <button id="calculateMultiCurrencyChange">Calcular Cambio en Dos Monedas</button>
-      </div>
+        <!-- Interruptor Toggle para mostrar/ocultar opciones -->
+<label class="switch">
+    <input type="checkbox" id="toggleSwitch">
+    <span class="slider round"></span>
+  </label>
+  <div id="changeOptions" style="display:none;">  <!-- Cambiado a none inicialmente -->
+    <div class="splinterSection">
+      <label for="firstCurrencyAmount"></label>
+      <input type="number" id="firstCurrencyAmount" placeholder="Monto en primera moneda">
+      <select id="firstCurrency">
+          <option value="USD">USD 🇺🇸</option>
+          <option value="EUR">EUR 🇪🇺</option>
+          <option value="Bs">Bs 🇻🇪</option>
+          <option value="COP">COP 🇨🇴</option>
+      </select>
+    </div>
+    
+      <div class="splinterSection">
+      <label for="secondCurrency">El resto en:</label>
+      <select id="secondCurrency">
+          <option value="EUR">EUR 🇪🇺</option>
+          <option value="USD">USD 🇺🇸</option>
+          <option value="Bs">Bs 🇻🇪</option>
+          <option value="COP">COP 🇨🇴</option>
+      </select>
+    </div>
+      
+      <button id="calculateMultiCurrencyChange">Calcular Cambio en Dos Monedas</button>
+  </div>
+  
       <div id="result2"></div>
     </div>
     <!-- <script src="exchangeRates.js"></script> -->

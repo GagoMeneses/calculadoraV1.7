@@ -2,20 +2,35 @@ body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f4f4;
   color: #333;
-  padding: 20px;
+  padding: 0;
   max-width: 600px;
   margin: auto;
 }
 
 .container {
   background: white;
-  padding: 20px;
+  padding: 5px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
   color: #333;
+  margin-bottom: 5px;
+}
+
+.cambiosInfo{
+  margin: 0, 0, 5px, 0;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: right;
+}
+
+h3 {
+  margin: 0;
+  font-size: 10px;
+  color: gray;
+  text-align: center;
 }
 
 p {
@@ -50,7 +65,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #007bff;
 }
 
 .exchange-type {
@@ -58,6 +73,7 @@ button:hover {
   align-items: center; /* Centra los elementos verticalmente */
   justify-content: space-around; /* Distribuye el espacio entre los elementos */
   gap: 10px; /* Espacio entre los elementos */
+  margin-right: 10px;
 }
 
 .exchange-type h2 {
@@ -67,7 +83,7 @@ button:hover {
 }
 
 .exchange-type select {
-  flex: 0 0 20%; 
+  flex: 0 0 20%;
 }
 
 
@@ -76,7 +92,98 @@ button:hover {
   align-items: center; 
   justify-content: space-around; 
   gap: 10px; 
-  margin-top: -20px;
+  margin-top: 0px;
+}
+
+.payment-section input[type="checkbox"] {
+  visibility: hidden;
+  position: absolute;
+}
+
+.payment-section input[type="number"] {
+  width: 50%;
+  margin-bottom: 5px;
+}
+
+.radio-buttons-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea si no caben */
+  align-items: center; /* Centra los elementos verticalmente */
+  justify-content: space-around; /* Distribuye el espacio alrededor de los elementos */
+}
+
+.radio-buttons-container > div {
+  margin: 5px; /* Espacio entre los elementos para mejor legibilidad */
+}
+
+.splinterSection {
+  display: flex;           /* Utiliza flexbox para alinear elementos internos */
+  flex-direction:column;  /* Alinea los elementos en columna */
+  justify-content: center; /* Centra los elementos verticalmente */
+  align-items: center;     /* Centra los elementos horizontalmente */
+  text-align: center;      /* Asegura que el texto dentro de los elementos también esté centrado */
+  padding: 0px;           /* Añade un poco de espacio alrededor del contenido */
+  border: none;  /* Opcional: Añade un borde para visualizar mejor el área del div */
+  margin: auto;            /* Centra el div en el contenedor padre (si es necesario) */
+  width: 80%;              /* Establece un ancho específico para el div, ajusta según necesites */
+}
+
+.splinterSection input{
+  margin: 5px, 0, 5, 0;
+}
+
+
+
+/* Estilo para el switch (toggle) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Estilo para el slider */
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #007bff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Añadiendo algo de estilo para la etiqueta del switch */
+label.switch {
+  margin-right: 10px;
 }
 
 
