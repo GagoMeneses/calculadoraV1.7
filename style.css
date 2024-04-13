@@ -53,4 +53,31 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* Agrega más estilos según necesites */
+.exchange-type {
+  display: flex;
+  align-items: center; /* Centra los elementos verticalmente */
+  justify-content: space-around; /* Distribuye el espacio entre los elementos */
+  gap: 10px; /* Espacio entre los elementos */
+}
+
+.exchange-type h2 {
+  flex: 0 0 80%;
+  margin-top: 0px;
+  text-align: right;
+}
+
+.exchange-type select {
+  flex: 0 0 20%; 
+}
+
+
+.total-amount {
+  display: flex;
+  align-items: center; 
+  justify-content: space-around; 
+  gap: 10px; 
+  margin-top: -20px;
+}
+
+
+

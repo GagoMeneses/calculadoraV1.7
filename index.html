@@ -10,7 +10,8 @@
 </head>
 <body>
     <div class="container">
-        <div>
+        <h1>InterCambio de Monedas</h1>
+        <div class="exchange-type">
             <h2>Tipo de cambio</h2>
             <select id="exchangeSource">
               <option value="BCV">BCV </option>
@@ -20,20 +21,21 @@
           </div>
           
         <div class="container">
-          <h1>InterCambio de Monedas</h1>
           <div>
-              <h2>Ingresa el monto Total a Pagar:</h2>
-              <input type="number" id="totalAmountToPay" placeholder="Monto Total">
-              <select id="currencyToPay">
-                  <option value="USD">Dólares Americanos (USD)</option>
-                  <option value="EUR">Euros (EUR)</option>
-                  <option value="Bs">Bolívares (Bs)</option>
-                  <option value="COP">Pesos Colombia (COP)</option>
-              </select>
+              <h2>Total a Pagar:</h2>
+              <div class="total-amount">
+                <input type="number" id="totalAmountToPay" placeholder="Monto Total">
+                <select id="currencyToPay">
+                    <option value="USD">Dólares Americanos (USD)</option>
+                    <option value="EUR">Euros (EUR)</option>
+                    <option value="Bs">Bolívares (Bs)</option>
+                    <option value="COP">Pesos Colombia (COP)</option>
+                </select>
+              </div>
           </div>
           <div>
         <div>
-            <h2>Selecciona la(s) moneda(s) con la(s) que vas pagar:</h2>
+            <h2>Vas a pagar con:</h2>
             <div>
                 <input type="checkbox" id="payWithUSD" name="paymentCurrency" value="USD">
                 <label for="payWithUSD">Dólares Americanos (USD)</label>
