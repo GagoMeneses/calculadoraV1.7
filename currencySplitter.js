@@ -35,13 +35,8 @@ function handleMultiCurrencyChange() {
 }
 
 
-
-
-
-
-
 function convertCurrency(amount, fromCurrency, toCurrency) {
-  const rate = exchangeRates[fromCurrency][toCurrency];
+  const rate = rates[fromCurrency][toCurrency];
   return amount * rate;
 }
 

@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function calculateChange() {
+  const source = document.getElementById('exchangeSource').value;
+  const rates = exchangeSources[source];
+
   const totalAmountToPay = parseFloat(document.getElementById('totalAmountToPay').value);
   const currencyToPay = document.getElementById('currencyToPay').value;
 
@@ -17,7 +20,7 @@ function calculateChange() {
       const currency = input.value;
       const amount = parseFloat(document.getElementById(`amount${currency}`).value) || 0;
       if (amount > 0) {
-          totalPaidInCurrencyToPay += amount * (exchangeRates[currency][currencyToPay] || 0);
+          totalPaidInCurrencyToPay += amount * (rates[currency][currencyToPay] || 0);
       }
   });
 
@@ -30,7 +33,7 @@ function calculateChange() {
 
   if (changeDue > 0 && changeCurrencies.length > 0) {
       let currencyForChange = changeCurrencies[0];
-      let changeInSelectedCurrency = changeDue * (exchangeRates[currencyToPay][currencyForChange] || 1);
+      let changeInSelectedCurrency = changeDue * (rates[currencyToPay][currencyForChange] || 1);
       showResults(changeInSelectedCurrency, currencyForChange, true);
   } else if (changeDue < 0) {
       showResults(Math.abs(changeDue), currencyToPay, false);
@@ -59,47 +62,6 @@ function showResults(changeDue, currency, isExactPayment) {
   }
 }
 
-
-///////////funcion de calculo dinamico para calcular lo que falta para pagar el monto total
-
-
-function updateAmountsNeeded() {
-  const totalAmountToPay = parseFloat(document.getElementById('totalAmountToPay').value) || 0;
-  const currencyToPay = document.getElementById('currencyToPay').value;
-
-  let totalPaid = {
-    "USD": parseFloat(document.getElementById('amountUSD').value) || 0,
-    "EUR": parseFloat(document.getElementById('amountEUR').value) || 0,
-    "Bs": parseFloat(document.getElementById('amountBs').value) || 0,
-    "COP": parseFloat(document.getElementById('amountCOP').value) || 0
-  };
-
-  // Convert each paid amount to the currency to pay and sum them up
-  let totalPaidInCurrencyToPay = Object.keys(totalPaid).reduce((acc, currency) => 
-    acc + (totalPaid[currency] * exchangeRates[currency][currencyToPay]), 0);
-  
-  let difference = totalAmountToPay - totalPaidInCurrencyToPay;
-
-  // Apply corrections to calculation method
-  calculateAndDisplayAmountsNeeded(difference, currencyToPay);
-}
-
-// New method to calculate and display amounts needed in each currency accurately
-function calculateAndDisplayAmountsNeeded(difference, currencyToPay) {
-  Object.keys(exchangeRates).forEach(currency => {
-    let resultElement = document.getElementById(`result${currency}`);
-    let amountNeeded = difference * exchangeRates[currencyToPay][currency];
-    resultElement.textContent = difference > 0 
-      ? `Faltan ${amountNeeded.toFixed(2)} ${currency} para completar el pago.` 
-      : "No se debe nada o hay un excedente.";
-  });
-}
-
-document.querySelectorAll('input[type="number"], select').forEach(element => {
-  element.addEventListener('input', updateAmountsNeeded);
-});
-
-updateAmountsNeeded();
 
   
 
