@@ -86,4 +86,4 @@ const exchangeSources = {
   }
 };
 
-window.exchangeRates = exchangeRates;
+window.exchangeSources = exchangeSources;
