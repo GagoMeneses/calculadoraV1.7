@@ -15,7 +15,7 @@ function resetCalculator() {
   clearElementsById(['totalAmountToPay', 'result', 'result2', 'resultUSD', 'resultEUR', 'resultBs', 'resultCOP']);
 
   // Restablecer campos de entrada numéricos, checkboxes y radios
-  applyToAllSelectors('input[type="number"], input[type="checkbox"], input[type="radio"]', input => {
+  applyToAllSelectors('input[type="number"], input[type="checkbox"]', input => {
     if (input.type === 'number') input.value = '';
     else input.checked = false;
   });

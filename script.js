@@ -7,6 +7,34 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+document.getElementById('toggleSwitch').addEventListener('change', function() {
+    var changeOptions = document.getElementById('changeOptions');
+    if (this.checked) {
+        changeOptions.style.display = 'block';  // Mostrar cuando el interruptor está activado
+    } else {
+        changeOptions.style.display = 'none';  // Ocultar cuando el interruptor está desactivado
+    }
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const paymentInputs = document.querySelectorAll('.payment-section input[type="number"]');
+
+    paymentInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            // Obtiene el checkbox asociado usando el atributo 'id' del input para buscar el checkbox correspondiente
+            const checkbox = document.getElementById(`payWith${input.id.slice(6)}`); // asume que los IDs están formateados correctamente, como 'amountUSD' para el input y 'payWithUSD' para el checkbox
+            if (parseFloat(input.value) > 0) {
+                checkbox.checked = true;
+            } else {
+                checkbox.checked = false;
+            }
+        });
+    });
+});
+
+// hasta aqui
+
 function calculateChange() {
   const source = document.getElementById('exchangeSource').value;
   const rates = exchangeSources[source];
