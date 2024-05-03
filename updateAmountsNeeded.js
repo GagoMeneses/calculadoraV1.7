@@ -21,12 +21,22 @@ function updateAmountsNeeded() {
     "COP": parseFloat(document.getElementById('amountCOP').value) || 0
   };
 
-  let totalPaidInCurrencyToPay = Object.keys(totalPaid).reduce((acc, currency) => 
-    acc + (totalPaid[currency] * (rates[currency][currencyToPay] || 0)), 0);
-  
+  if (!rates || !currencyToPay || !Object.keys(rates).length) {
+    console.error("Las tasas de cambio no están disponibles o no se ha seleccionado una moneda para pagar.");
+    return; // Detener la ejecución si no hay tasas o no se ha seleccionado moneda
+  }
+
+  let totalPaidInCurrencyToPay = Object.keys(totalPaid).reduce((acc, currency) => {
+    if (rates[currency] && rates[currency][currencyToPay]) {
+      return acc + (totalPaid[currency] * rates[currency][currencyToPay]);
+    }
+    return acc; // Si no existe una tasa para ese cambio, simplemente devuelve el acumulador
+  }, 0);
+
   let difference = totalAmountToPay - totalPaidInCurrencyToPay;
   calculateAndDisplayAmountsNeeded(difference, currencyToPay);
 }
+
 
 function calculateAndDisplayAmountsNeeded(difference, currencyToPay) {
   Object.keys(rates).forEach(currency => {

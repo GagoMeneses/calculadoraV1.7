@@ -87,3 +87,33 @@ const exchangeSources = {
 };
 
 window.exchangeSources = exchangeSources;
+
+
+
+
+
+
+
+// // Definición inicial de exchangeSources con estructuras básicas y valores predeterminados
+
+// window.exchangeSources = {
+//   BCV: {
+//       USD: { EUR: 0, Bs: 0, COP: 0, USD: 1 },
+//       EUR: { USD: 0, Bs: 0, COP: 0, EUR: 1 },
+//       Bs: { USD: 0, EUR: 0, COP: 0, Bs: 1 },
+//       COP: { USD: 0, EUR: 0, Bs: 0, COP: 1 }
+//   },
+//   Paralelo: {
+//       USD: { EUR: 0, Bs: 0, COP: 0, USD: 1 },
+//       EUR: { USD: 0, Bs: 0, COP: 0, EUR: 1 },
+//       Bs: { USD: 0, EUR: 0, COP: 0, Bs: 1 },
+//       COP: { USD: 0, EUR: 0, Bs: 0, COP: 1 }
+//   }
+//   // Aquí podrías agregar otras estructuras para diferentes fuentes de tasas de cambio si es necesario
+// };
+
+// // La actualización de estos valores se deberá realizar en script.js después de obtener los datos del servidor
+
+
+
+// window.exchangeSources = exchangeSources;

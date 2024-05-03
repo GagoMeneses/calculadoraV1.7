@@ -33,6 +33,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+//desta es la funcion que actualiza window.exchangeSources con los datos recibidos del servidor.
+
+function fetchExchangeRates() {
+    fetch('/api/exchange-rates')
+        .then(response => response.json())
+        .then(data => {
+            window.exchangeSources = data;
+            console.log('Tasas de cambio actualizadas:', window.exchangeSources);
+        })
+        .catch(error => console.error('Error al obtener los datos de la API:', error));
+}
+
+
 // hasta aqui
 
 function calculateChange() {
@@ -89,6 +102,9 @@ function showResults(changeDue, currency, isExactPayment) {
       localStorage.removeItem('changeCurrency');
   }
 }
+
+
+
 
 
   
