@@ -24,9 +24,9 @@
           
         <div class="container">
           <div>
-              <h2>Total a Pagar:</h2>
+              <h2>¿Cuanto vas a pagar?</h2>
               <div class="total-amount">
-                <input type="number" id="totalAmountToPay" placeholder="Monto Total">
+                <input type="number" id="totalAmountToPay" placeholder="Monto Total a pagar">
                 <select id="currencyToPay">
                     <option value="USD">Dólares 🇺🇸</option>
                     <option value="EUR">Euros 🇪🇺</option>
@@ -37,7 +37,7 @@
           </div>
           <div>
         <div>
-            <h2>Vas a pagar con:</h2>
+            <h2>¿Con cuanto vas a pagar?</h2>
             <div class="payment-section">
                 <input type="number" id="amountUSD" placeholder="Monto en USD">
                 <input type="checkbox" id="payWithUSD" name="paymentCurrency" value="USD">
@@ -85,9 +85,7 @@
             </div>
             
         </div>
-        <button onclick="calculateChange()">Calcular Cambio</button>
-        <!-- <button id="resetButton">Reiniciar</button> -->
-
+    
         <div id="result"></div>
 
         <div>
