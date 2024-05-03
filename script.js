@@ -107,6 +107,9 @@ function showResults(changeDue, currency, isExactPayment) {
 
 
 
+
+
+
   
 
 
