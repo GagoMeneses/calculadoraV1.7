@@ -1,5 +1,23 @@
-<script src="exchangeSources.js"></script>
-<script src="resetCalculator.js"></script>
-<script src="script.js"></script>
-<script src="currencySplitter.js"></script>
-    <script src="./updateAmountsNeeded.js"></script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasa de Cambio BCV</title>
+</head>
+<body>
+    <h1>Tasa de Cambio del Bolívar (BCV)</h1>
+    <div id="paralelRate">Cargando tasa...</div>
+
+    <script>
+        fetch('./public/parallelExchangeRate.json')
+        .then(response => response.json())
+        .then(data => {
+    const usdPvef = data.USDPVEF;
+    const usdPvefRound = usdPvef.toFixed(2);
+    document.getElementById('exchangeRate').textContent = `${usdPvefRound} Bs`;
+})
+
+        .catch(error => console.error('Error al cargar los datos:', error));
+    </script>
+</body>
+</html>

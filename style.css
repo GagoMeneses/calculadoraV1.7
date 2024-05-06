@@ -12,7 +12,53 @@ body {
   padding: 5px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
 }
+
+#cambios-container {
+  display: flex;
+  justify-content: space-around; /* Esto asegura que haya espacio entre ambos elementos */
+  align-items: center; /* Alinea los elementos verticalmente en el centro */
+  width: 100%; /* Ajusta el ancho del contenedor al 100% del contenedor padre */
+  
+}
+
+#exchangeRate, #paralelRate {
+  width: 46%; /* Asigna un ancho para asegurar que no se superpongan */
+  padding: 10px; /* Opcional, agrega algo de espacio dentro de los divs */
+  box-sizing: border-box; /* Incluye el padding en el cálculo del ancho */
+  color:white;
+  background-color: #007bff;
+  text-align: center;
+  font-weight: 600;
+  font-size: large;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  
+}
+
+#exchangeRate:hover, #paralelRate:hover {
+  background-color: #007bff;
+  transition: background-color 0.3s;
+}
+
+#exchangeRate.active, #paralelRate.active {
+  /* background-color: rgb(52, 99, 52); Cambia al color que prefieras para el activo */
+  color: rgb(0, 0, 0);
+  border: solid;
+  border-color: rgb(0, 0, 0);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+
+.exchange-type {
+  display: none !important;
+}
+
+
 
 h1, h2 {
   color: #333;
@@ -137,7 +183,7 @@ button:hover {
 /* Estilo para el switch (toggle) */
 .switch {
   position: relative;
-  display: inline-block;
+  display: none;
   width: 60px;
   height: 34px;
 }
@@ -188,13 +234,30 @@ label.switch {
 
 #result {
   background-color: #007bff;
-  color: white;
+  color: black;
+  border: solid;
   font-weight: bold;
   font-size: 24px;
   margin-top: 20px;
   padding: 10px;
   border-radius: 15px;
   text-align: center;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+  display: none;
+}
+
+.pEmergentes {
+  background-color: #007bff;
+  color: black;
+  border: solid;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+
 }
 
 

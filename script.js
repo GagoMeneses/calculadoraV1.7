@@ -1,4 +1,7 @@
+import { exchangeSources } from './exchangeSources.js';
+
 document.addEventListener('DOMContentLoaded', function() {
+    numeral.locale('de');
     registerEventListeners();
     setupPaymentInputs();
     setupAutoCalculate();
@@ -35,24 +38,9 @@ function setupAutoCalculate() {
     });
 }
 
-// Resto de las funciones (fetchExchangeRates, calculateChange, showResults) permanecen sin cambios
-
-
-function fetchExchangeRates() {
-    fetch('/api/exchange-rates')
-        .then(response => response.json())
-        .then(data => {
-            window.exchangeSources = data;
-            console.log('Tasas de cambio actualizadas:', window.exchangeSources);
-        })
-        .catch(error => {
-            console.error('Error al obtener los datos de la API:', error);
-        });
-}
-
 function calculateChange() {
     const source = document.getElementById('exchangeSource').value;
-    const rates = window.exchangeSources[source];
+    const rates = exchangeSources[source];
     const totalAmountToPay = parseFloat(document.getElementById('totalAmountToPay').value);
     const currencyToPay = document.getElementById('currencyToPay').value;
 
@@ -79,32 +67,20 @@ function calculateChange() {
 
 function showResults(changeDue, currency, isExactPayment) {
     const resultDiv = document.getElementById('result');
-    const message = isExactPayment
-        ? (changeDue > 0 ? `Tú cambio en ${currency} son: ${changeDue.toFixed(2)}` : '')
-        : '';
-    resultDiv.innerHTML = message;
-
-    if (isExactPayment && changeDue > 0) {
-        localStorage.setItem('changeDue', changeDue);
-        localStorage.setItem('changeCurrency', currency);
+    const formattedChangeDue = numeral(changeDue).format('0,0.00');
+    if (isExactPayment) {
+        if (changeDue > 0) {
+            resultDiv.innerHTML = `Tú cambio en ${currency}: <br>${formattedChangeDue}`;
+            localStorage.setItem('changeDue', changeDue);
+            localStorage.setItem('changeCurrency', currency);
+        } else {
+            resultDiv.innerHTML = 'Pago Exacto';
+            localStorage.removeItem('changeDue');
+            localStorage.removeItem('changeCurrency');
+        }
     } else {
+        resultDiv.innerHTML = '';
         localStorage.removeItem('changeDue');
         localStorage.removeItem('changeCurrency');
     }
 }
-
-// function showResults(changeDue, currency, isExactPayment) {
-//     const resultDiv = document.getElementById('result');
-//     const message = isExactPayment
-//         ? (changeDue > 0 ? `Tú cambio en ${currency} son: ${changeDue.toFixed(2)}` : 'Pago exacto, no se debe cambio.')
-//         : `Faltan ${currency}: ${changeDue.toFixed(2)}`;
-//     resultDiv.innerHTML = message;
-
-//     if (isExactPayment && changeDue > 0) {
-//         localStorage.setItem('changeDue', changeDue);
-//         localStorage.setItem('changeCurrency', currency);
-//     } else {
-//         localStorage.removeItem('changeDue');
-//         localStorage.removeItem('changeCurrency');
-//     }
-// }

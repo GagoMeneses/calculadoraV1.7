@@ -1,46 +1,45 @@
+import { exchangeSources } from './exchangeSources.js';
+
 document.addEventListener('DOMContentLoaded', function() {
   const multiCurrencyButton = document.getElementById('calculateMultiCurrencyChange');
   if (multiCurrencyButton) {
-      multiCurrencyButton.addEventListener('click', function() {
-          handleMultiCurrencyChange();
-      });
+    multiCurrencyButton.addEventListener('click', function() {
+      handleMultiCurrencyChange();
+    });
   }
 });
 
 function handleMultiCurrencyChange() {
   const changeDue = parseFloat(localStorage.getItem('changeDue'));
-
   if (!isNaN(changeDue)) {
-      let firstCurrencyAmount = parseFloat(document.getElementById('firstCurrencyAmount').value);
-      let firstCurrency = document.getElementById('firstCurrency').value;
+    let firstCurrencyAmount = parseFloat(document.getElementById('firstCurrencyAmount').value);
+    let firstCurrency = document.getElementById('firstCurrency').value;
+    const changeCurrency = localStorage.getItem('changeCurrency'); // Assuming 'changeDue' is in this currency
 
-      // Convert 'firstCurrencyAmount' to the currency of 'changeDue' for accurate comparison
-      const changeCurrency = localStorage.getItem('changeCurrency'); // Assuming 'changeDue' is in this currency
-      let firstCurrencyAmountInChangeCurrency = convertCurrency(firstCurrencyAmount, firstCurrency, changeCurrency);
+    let firstCurrencyAmountInChangeCurrency = convertCurrency(firstCurrencyAmount, firstCurrency, changeCurrency, exchangeSources);
 
-      // Ensure the converted 'firstCurrencyAmount' does not exceed 'changeDue'
-      if (firstCurrencyAmountInChangeCurrency > changeDue) {
-          alert("El monto en la primera moneda, convertido al cambio debido, no puede ser mayor que el cambio debido.");
-          // Reset or adjust the 'firstCurrencyAmount' input if necessary
-          return; // Stop execution to prevent processing an invalid amount
-      }
+    if (firstCurrencyAmountInChangeCurrency > changeDue) {
+      alert("El monto en la primera moneda, convertido al cambio debido, no puede ser mayor que el cambio debido.");
+      return;
+    }
 
-      let secondCurrency = document.getElementById('secondCurrency').value;
-      let remainingChange = changeDue - firstCurrencyAmountInChangeCurrency;
-      let secondCurrencyAmount = convertCurrency(remainingChange, changeCurrency, secondCurrency);
-      showMultiCurrencyChange(firstCurrencyAmount, firstCurrency, secondCurrencyAmount, secondCurrency);
+    let secondCurrency = document.getElementById('secondCurrency').value;
+    let remainingChange = changeDue - firstCurrencyAmountInChangeCurrency;
+    let secondCurrencyAmount = convertCurrency(remainingChange, changeCurrency, secondCurrency, exchangeSources);
+    showMultiCurrencyChange(firstCurrencyAmount, firstCurrency, secondCurrencyAmount, secondCurrency);
   } else {
-      console.error("No hay cambio debido almacenado para ser dividido en dos monedas.");
+    console.error("No hay cambio debido almacenado para ser dividido en dos monedas.");
   }
 }
 
-
-function convertCurrency(amount, fromCurrency, toCurrency) {
+function convertCurrency(amount, fromCurrency, toCurrency, rates) {
   const rate = rates[fromCurrency][toCurrency];
-  return amount * rate;
+  return amount * (rate || 0); // Provide default fallback rate of 0 if not found
 }
 
 function showMultiCurrencyChange(firstAmount, firstCurrency, secondAmount, secondCurrency) {
   const resultDiv = document.getElementById('result2');
   resultDiv.innerHTML = `Cambio en ${firstCurrency}: ${firstAmount.toFixed(2)}<br>Cambio en ${secondCurrency}: ${secondAmount.toFixed(2)}`;
 }
+
+export { handleMultiCurrencyChange };

@@ -1,74 +1,15 @@
-// Asumiendo que exchangeRates.json está accesible públicamente en la carpeta 'public'
-const loadExchangeRates = async () => {
-  try {
-    const response = await fetch('./public/exchangeRates.json'); // Ajusta la ruta según sea necesario
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const exchangeRates = await response.json();
+import('node-fetch').then(({ default: fetch }) => {
+  // La URL para la API de ParallelRate
+  const url = 'https://www.parallelrate.org/api/currentprice?currency=USDPVEF';
 
-    const exchangeSources = {
-      BCV: exchangeRates.BCV,
+  fetch(url)
+      .then(response => response.json())
+      .then(data => {
+          console.log('Datos recibidos de ParallelRate:', data);
 
-      Paralelo: {
-        "USD": { 
-          "EUR": 0.92363395,
-          "Bs": 38.86,
-          "COP": 3768.10,
-          "USD": 1 
-        },
-        "EUR": { 
-          "USD": 1.0826800, 
-          "Bs": 42.07294480,
-          "COP": 4079.64650800, 
-          "EUR": 1 
-        },
-        "Bs": { 
-          "USD": 0.0257334019557385, 
-          "EUR": 0.02376824, 
-          "COP": 96.9660317712306, 
-          "Bs": 1 
-        },
-        "COP": { 
-          "USD": 0.00026539, 
-          "EUR": 0.00024512,
-          "Bs": 0.0103128898,
-          "COP": 1 
-        }
-      },
+          // Aquí puedes manejar los datos recibidos, por ejemplo, actualizar una variable global
+          // o guardar los datos en el estado de tu aplicación para ser usados donde sea necesario.
+      })
+      .catch(error => console.error('Error al obtener los datos de ParallelRate:', error));
+});
 
-      DolarToday: {
-        "USD": { 
-          "EUR": 0.92363395,
-          "Bs": 38.86,
-          "COP": 3768.10,
-          "USD": 1 
-        },
-        "EUR": { 
-          "USD": 1.0826800, 
-          "Bs": 42.07294480,
-          "COP": 4079.64650800, 
-          "EUR": 1 
-        },
-        "Bs": { 
-          "USD": 0.0257334019557385, 
-          "EUR": 0.02376824, 
-          "COP": 96.9660317712306, 
-          "Bs": 1 
-        },
-        "COP": { 
-          "USD": 0.00026539, 
-          "EUR": 0.00024512,
-          "Bs": 0.0103128898,
-          "COP": 1 
-        }
-      }
-    };
-
-    console.log(exchangeSources); // Verifica que la actualización es correcta
-  } catch (error) {
-    console.error('Failed to load exchange rates:', error);
-  }
-};
-
-loadExchangeRates();

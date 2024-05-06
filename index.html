@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Conversión de Moneda</title>
+    <title>Calculadora 18e</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="/manifest.json">
+
+    <script src="./src/numeralMin.js"></script>
+
 
 </head>
 <body>
     <div class="container">
         <h3>&#x2193;Desliza para reiniciar&#x2193;</h3>
-        <h1>Calculadora de Pagos y Cambios</h1>
+        <div id="cambios-container" id="exchangeSource">
+            <div id="exchangeRate" class="toggle-button">Cargando tasa...</div>
+            <div id="paralelRate" class="toggle-button">Cargando tasa...</div>
+        </div>
+        <h1>Calcula tu vuelto</h1>
         <div class="exchange-type">
             <h2>Tipo de cambio</h2>
             <select class="exchangeSource" id="exchangeSource">
-              <option value="BCV">BCV </option>
+              <option value="BCV" selected>BCV </option>
               <option value="Paralelo">Paralelo</option>
-              <option value="DolarToday">DolarToday</option>
             </select>
           </div>
-          <h2 class="cambiosInfo">BCV:36.23 - DolarToday:38.86</h2>
-          
         <div class="container">
           <div>
               <h2>¿Cuanto vas a pagar?</h2>
@@ -35,6 +39,15 @@
                 </select>
               </div>
           </div>
+
+          <div id="experimento">
+            <p id="resultUSD" class="pEmergentes"></p>
+            <p id="resultEUR" class="pEmergentes"></p>
+            <p id="resultBs" class="pEmergentes"> </p>
+            <p id="resultCOP" class="pEmergentes"></p>
+
+          </div>
+
           <div>
         <div>
             <h2>¿Con cuanto vas a pagar?</h2>
@@ -42,25 +55,25 @@
                 <input type="number" id="amountUSD" placeholder="Monto en USD">
                 <input type="checkbox" id="payWithUSD" name="paymentCurrency" value="USD">
                 <label for="payWithUSD">Dólares</label>
-                <p id="resultUSD"></p>
+                
             </div>
             <div class="payment-section">
                 <input type="number" id="amountEUR" placeholder="Monto en EUR">
                 <input type="checkbox" id="payWithEUR" name="paymentCurrency" value="EUR">
                 <label for="payWithEUR">Euros</label>
-                <p id="resultEUR"></p>
+                
             </div>
             <div class="payment-section">
                 <input type="number" id="amountBs" placeholder="Monto en Bs">
                 <input type="checkbox" id="payWithBs" name="paymentCurrency" value="Bs">
                 <label for="payWithBsBCV">Bolívares</label>
-                <p id="resultBs"></p>
+                
             </div>
             <div class="payment-section">
                 <input type="number" id="amountCOP" placeholder="Monto en COP">
                 <input type="checkbox" id="payWithCOP" name="paymentCurrency" value="COP">
                 <label for="payWithCOP">Pesos</label>
-                <p id="resultCOP"></p>
+                
             </div>
         </div>
         <div>
@@ -88,52 +101,37 @@
     
         <div id="result"></div>
 
-        <div>
-          <h2>¿Recibes el cambio en dos monedas?</h2>
-        </div>
+        
 
-        <!-- Interruptor Toggle para mostrar/ocultar opciones -->
-<label class="switch">
-    <input type="checkbox" id="toggleSwitch">
-    <span class="slider round"></span>
-  </label>
-  <div id="changeOptions" style="display:none;">  <!-- Cambiado a none inicialmente -->
-    <div class="splinterSection">
-      <label for="firstCurrencyAmount"></label>
-      <input type="number" id="firstCurrencyAmount" placeholder="Monto en primera moneda">
-      <select id="firstCurrency">
-          <option value="USD">USD 🇺🇸</option>
-          <option value="EUR">EUR 🇪🇺</option>
-          <option value="Bs">Bs 🇻🇪</option>
-          <option value="COP">COP 🇨🇴</option>
-      </select>
+        <!-- Interruptor Toggle para mostrar/ocultar opciones que por aluna razon es imporatente no tocar -->
+        <label class="switch">
+            <input type="checkbox" id="toggleSwitch">
+            <span class="slider round"></span>
+        </label>
     </div>
-    
-      <div class="splinterSection">
-      <label for="secondCurrency">El resto en:</label>
-      <select id="secondCurrency">
-          <option value="EUR">EUR 🇪🇺</option>
-          <option value="USD">USD 🇺🇸</option>
-          <option value="Bs">Bs 🇻🇪</option>
-          <option value="COP">COP 🇨🇴</option>
-      </select>
-    </div>
-      
-      <button id="calculateMultiCurrencyChange">Calcular Cambio en Dos Monedas</button>
-  </div>
-  
-      <div id="result2"></div>
-    </div>
+
+
+
     <!-- <script src="exchangeRates.js"></script> -->
-    <script src="exchangeSources.js"></script>
-    <!-- <script type="module" src="exchangeSources.js"></script> -->
+    <!-- <script src="exchangeSources.js"></script> -->
+    <script type="module" src="exchangeSources.js"></script>
     <!-- <script src="exchangeSources.mjs"></script> -->
     <!-- <script src="./server.js"></script> -->
-    <script src="script.js"></script>
-    <script src="currencySplitter.js"></script>
-    <script src="./updateAmountsNeeded.js"></script>
-    <!-- <script type="module" src="path/to/updateAmountsNeeded.js"></script> -->
-    <!-- <script src="resetCalculator.js"></script> -->
+    <script type="module" src="script.js"></script>
+    <script type="module" src="currencySplitter.js"></script>
+    <script type="module" src="./updateAmountsNeeded.js"></script>
+    <script src="./mostrarCambioBCV.js" ></script>
+    <script src="./mostrarCambioParalelo.js" ></script>
+    <script type="module" src="./test.js"></script>
+    <script src="./resultDramatico.js"></script>
+
+    <script src="./botonElegirCambio.js" ></script>
+    <script src="./selecionaElBotomBCV.js" ></script>
+
+    <!-- los siguientes dos pajuos hacen lo mismo -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/locales/de.min.js"></script> -->
+    <script src="./src/localesDeMi.js"></script>
+
     
 </body>
 </html>
